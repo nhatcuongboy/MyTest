@@ -26,21 +26,37 @@ class ListMember extends Component {
   }
 
   renderData() {
-    return this.state.members.map((object, i) => {
+    if (this.state.members.length === 0) {
       return (
-        <tr key={object._id}>
+        <tr>
           <td>
-            {i + 1}
-          </td>
+            Empty
+        </td>
           <td>
-            {object.name}
-          </td>
+            Empty
+        </td>
           <td>
-            <Link to={"/edit-member/" + object._id} > Edit</Link>
+            Empty
           </td>
         </tr>
-      );
-    });
+      )
+    } else {
+      return this.state.members.map((object, i) => {
+        return (
+          <tr key={object._id}>
+            <td>
+              {i + 1}
+            </td>
+            <td>
+              {object.name}
+            </td>
+            <td>
+              <Link to={"/edit-member/" + object._id} > Edit</Link>
+            </td>
+          </tr>
+        );
+      });
+    }
   }
 
   render() {

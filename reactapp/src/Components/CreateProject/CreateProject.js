@@ -58,7 +58,10 @@ class CreateProject extends Component {
           this.props.history.push('/list-project');
         })
         .catch(err => {
-
+          if (err.response.status === 500) {
+            alert("Duplicate name")
+          }
+          console.log(err)
         })
     } else {
       alert("Form has errors.")
@@ -121,7 +124,7 @@ class CreateProject extends Component {
           </div>
           <div className="form-group">
             <label>Member List: </label>
-            <p style={{borderStyle: 'dotted', padding: 10}}>{this.renderData()}</p>
+            <div style={{borderStyle: 'dotted', padding: 10}}>{this.renderData()}</div>
           </div>
           <div className="form-group">
             <input type="submit" value="Create" className="btn btn-primary" />

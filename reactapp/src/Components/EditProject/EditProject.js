@@ -20,7 +20,6 @@ class EditProject extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.match.params.id)
     axios.get('http://localhost:4000/api/member/members')
       .then(res => {
         this.setState({
@@ -81,6 +80,9 @@ class EditProject extends Component {
           alert('Update project successfully !!!');
           this.props.history.push('/list-project');
         }).catch(err => {
+          if (err.response.status === 500) {
+            alert("Duplicate name")
+          }
           console.log(err)
         })
     } else {
@@ -131,7 +133,7 @@ class EditProject extends Component {
           </div>
           <div className="form-group">
             <label>Member list: </label>
-            <p style={{borderStyle: 'dotted', padding: 10}}>{this.renderData()}</p>
+            <div style={{borderStyle: 'dotted', padding: 10}}>{this.renderData()}</div>
           </div>
           <div className="form-group">
             <input type="submit" value="Update" className="btn btn-success" />
